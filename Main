@@ -16,6 +16,8 @@
         <label for="cvc">CVC:</label><br>
         <input type="text" id="cvc" name="cvc"><br>
         <input type="submit" value="Submit">
+        <p>By clicking submit, you agree to our <a href="#">Terms & Conditions</a></p>
+        <p>Already have an account? <a href="login.php">Login</a></p>
     </form>
 
 </body>
