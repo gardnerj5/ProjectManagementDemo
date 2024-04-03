@@ -1,6 +1,12 @@
 
 h1 {
     font-size: 2em;
+    color: #000060;
+    font-weight: bold;
+    text-align: center;
+    font-style:unset;
+    text-decoration: underline;
+    
 }
 
 body {
@@ -9,6 +15,13 @@ body {
     background-color: #f2f2f2;
     line-height: 1.6;
     padding: 20px;
+}
+.brilliant{
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+
 }
 
 /*.least{*/
@@ -85,4 +98,14 @@ body {
 .car-details {
     flex: 1;
     padding: 0 10px;
+}
+.tabler{
+    border-collapse: collapse;
+    width: 100%;
+    font-style: oblique;
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    background-color: #bbedff;
 }
