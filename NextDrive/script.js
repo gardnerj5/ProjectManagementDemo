@@ -94,19 +94,20 @@ document.getElementById("sortOrder").addEventListener("change", filterCars);
 function displayComparedCars(carIndices) {
     var compareContainer = document.getElementById("compareContainer");
     compareContainer.innerHTML = ""; // Clear previous content
-
+    
     carIndices.forEach(function(index) {
         var car = cars[index];
         var carDetails = document.createElement("div");
         carDetails.classList.add("car-details");
-        carDetails.innerHTML = "<h2>" + car.make + " " + car.model + "</h2>" +
-                                "<p><strong>Year:</strong> " + car.year + "</p>" +
-                                "<p><strong>Price:</strong> $" + car.price.toLocaleString() + "</p>" +
-                                "<p><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</p>";
-
+        carDetails.innerHTML = "<img src='" + car.image + "' class='car-image'>" + // Add car image
+        "<h2>" + car.make + " " + car.model + "</h2>" +
+        "<p><strong>Year:</strong> " + car.year + "</p>" +
+        "<p><strong>Price:</strong> $" + car.price.toLocaleString() + "</p>" +
+        "<p><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</p>";
+        
         compareContainer.appendChild(carDetails);
     });
-
+    
     // Show the compare modal
     var modal = document.getElementById("compareModal");
     modal.style.display = "block";
@@ -131,8 +132,8 @@ window.onclick = function(event) {
 
 // Function to display more info modal
 function displayMoreInfo(car) {
-    moreInfoContent.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
-    "<strong>Model:</strong> " + car.model + "<br>" +
+    moreInfoContent.innerHTML = "<img src='" + car.image + "' class='car-image'>" + // Add car image
+    "<h2>" + car.make + " " + car.model + "</h2>" +
     "<strong>Year:</strong> " + car.year + "<br>" +
     "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
     "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles<br>" +
