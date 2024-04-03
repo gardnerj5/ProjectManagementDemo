@@ -41,18 +41,26 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
+            display: flex;
         }
         .close {
             color: #aaa;
-            float: right;
             font-size: 28px;
             font-weight: bold;
+            cursor: pointer;
         }
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
-            cursor: pointer;
+        }
+        .compare-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .car-details {
+            flex: 1;
+            padding: 0 10px;
         }
     </style>
 </head>
@@ -122,21 +130,23 @@
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
         </select>
-    
-
-        <!-- Other filter elements -->
-
-        <!-- "More Info" Modal -->
-        <div id="moreInfoModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="moreInfoContent"></div>
-            </div>
-        </div>
     </div>
 
     <div id="carList">
-        <!-- Car information will be dynamically added here -->
+        <!-- Car information with checkboxes -->
+    </div>
+
+    <!-- "Compare" button -->
+    <button id="compareBtn" style="margin-top: 20px;">Compare</button>
+
+    <!-- More Info Modal -->
+    <div id="moreInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="compareContainer" class="compare-container">
+                <!-- Container for compared car details -->
+            </div>
+        </div>
     </div>
 
     <script>
@@ -151,116 +161,88 @@
             { make: "Audi", model: "A4", year: 2019, price: 45000, mileage: 22000, image: "https://via.placeholder.com/150" },
             { make: "Mercedes-Benz", model: "C-Class", year: 2021, price: 55000, mileage: 12000, image: "https://via.placeholder.com/150" }
         ];
-        
+
         // Function to display cars
         function displayCars(cars) {
             var carList = document.getElementById("carList");
             carList.innerHTML = ""; // Clear previous content
-            
+
             cars.forEach(function(car, index) {
                 var carDiv = document.createElement("div");
                 carDiv.classList.add("car-row"); // Add class for styling
-                carDiv.innerHTML = "<img src='" + car.image + "' class='car-image'>" +
-                "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
-                "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
-                "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
-                "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
-                "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>" +
-                "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; // Add More Info button
-                
+                carDiv.innerHTML = "<input type='checkbox' class='car-checkbox' data-index='" + index + "'>" + // Add checkbox
+                                   "<img src='" + car.image + "' class='car-image'>" +
+                                   "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
+                                   "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
+                                   "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
+                                   "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
+                                   "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>";
+
                 carList.appendChild(carDiv);
             });
-            
-            // Reattach event listeners for "More Info" buttons
-            attachMoreInfoEventListeners();
         }
-        
-        // Function to attach event listeners for "More Info" buttons
-        function attachMoreInfoEventListeners() {
-            var moreInfoBtns = document.querySelectorAll(".more-info-btn");
-            moreInfoBtns.forEach(function(btn) {
-                btn.addEventListener("click", function(event) {
-                    event.stopPropagation();
-                    var carIndex = parseInt(btn.getAttribute("data-index"));
-                    var car = cars[carIndex];
-                    displayMoreInfo(car);
-                });
-            });
-        }
-        
+
         // Initial display
         displayCars(cars);
-        
-        // Event listeners for filter selects and inputs
-        var makeFilter = document.getElementById("makeFilter");
-        var modelFilter = document.getElementById("modelFilter");
-        var yearFilter = document.getElementById("yearFilter");
-        var priceMin = document.getElementById("priceMin");
-        var priceMax = document.getElementById("priceMax");
-        var mileageMin = document.getElementById("mileageMin");
-        var mileageMax = document.getElementById("mileageMax");
-        var sortBy = document.getElementById("sortBy");
-        var sortOrder = document.getElementById("sortOrder");
-        
-        [makeFilter, modelFilter, yearFilter, priceMin, priceMax, mileageMin, mileageMax, sortBy, sortOrder].forEach(function(element) {
-            element.addEventListener("change", filterAndSort);
-        });
-        
-        // Function to filter and sort cars
-        function filterAndSort() {
-            var filteredCars = cars.filter(function(car) {
-                return (makeFilter.value === "" || car.make === makeFilter.value) &&
-                (modelFilter.value === "" || car.model === modelFilter.value) &&
-                (yearFilter.value === "" || car.year == yearFilter.value) &&
-                (priceMin.value === "" || car.price >= parseInt(priceMin.value)) &&
-                (priceMax.value === "" || car.price <= parseInt(priceMax.value)) &&
-                (mileageMin.value === "" || car.mileage >= parseInt(mileageMin.value)) &&
-                (mileageMax.value === "" || car.mileage <= parseInt(mileageMax.value));
-            });
-            
-            // Sorting
-            var sortByValue = sortBy.value;
-            var sortOrderValue = sortOrder.value;
-            
-            filteredCars.sort(function(a, b) {
-                if (sortOrderValue === "asc") {
-                    return a[sortByValue] - b[sortByValue];
-                } else {
-                    return b[sortByValue] - a[sortByValue];
-                }
-            });
-            
-            displayCars(filteredCars);
+
+        // Event listener for Compare button
+        var compareBtn = document.getElementById("compareBtn");
+        compareBtn.addEventListener("click", compareSelectedCars);
+
+        // Function to compare selected cars
+        function compareSelectedCars() {
+            var checkedCheckboxes = document.querySelectorAll(".car-checkbox:checked");
+            if (checkedCheckboxes.length === 2) {
+                var carIndices = [];
+                checkedCheckboxes.forEach(function(checkbox) {
+                    carIndices.push(parseInt(checkbox.getAttribute("data-index")));
+                });
+
+                // Display more info modal with compared cars
+                displayComparedCars(carIndices);
+            } else {
+                alert("Please select exactly two cars to compare.");
+            }
         }
-        
+
+        // Function to display compared car details
+        function displayComparedCars(carIndices) {
+            var compareContainer = document.getElementById("compareContainer");
+            compareContainer.innerHTML = ""; // Clear previous content
+
+            carIndices.forEach(function(index) {
+                var car = cars[index];
+                var carDetails = document.createElement("div");
+                carDetails.classList.add("car-details");
+                carDetails.innerHTML = "<h2>" + car.make + " " + car.model + "</h2>" +
+                                        "<p><strong>Year:</strong> " + car.year + "</p>" +
+                                        "<p><strong>Price:</strong> $" + car.price.toLocaleString() + "</p>" +
+                                        "<p><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</p>";
+
+                compareContainer.appendChild(carDetails);
+            });
+
+            // Show the modal
+            var modal = document.getElementById("moreInfoModal");
+            modal.style.display = "block";
+        }
+
         // More Info Modal
         var modal = document.getElementById("moreInfoModal");
         var moreInfoContent = document.getElementById("moreInfoContent");
-        
+
         // Event listener for "Close" button in the modal
         var closeBtn = document.getElementsByClassName("close")[0];
         closeBtn.onclick = function() {
             modal.style.display = "none";
         };
-        
+
         // Event listener for clicking outside the modal to close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         };
-        
-        // Function to display more info modal
-        function displayMoreInfo(car) {
-            moreInfoContent.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
-            "<strong>Model:</strong> " + car.model + "<br>" +
-            "<strong>Year:</strong> " + car.year + "<br>" +
-            "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
-            "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles";
-            modal.style.display = "block";
-        }
     </script>
-
-
 </body>
 </html>
