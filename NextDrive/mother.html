@@ -41,10 +41,10 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            display: flex;
         }
         .close {
             color: #aaa;
+            float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
@@ -133,7 +133,7 @@
     </div>
 
     <div id="carList">
-        <!-- Car information with checkboxes -->
+        <!-- Car information with checkboxes and more info buttons -->
     </div>
 
     <!-- "Compare" button -->
@@ -143,9 +143,15 @@
     <div id="moreInfoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="compareContainer" class="compare-container">
-                <!-- Container for compared car details -->
-            </div>
+            <div id="moreInfoContent"></div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div id="compareModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="compareContainer" class="compare-container"></div>
         </div>
     </div>
 
@@ -176,9 +182,21 @@
                                    "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
                                    "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
                                    "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
-                                   "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>";
+                                   "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>" +
+                                   "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; // Add More Info button
 
                 carList.appendChild(carDiv);
+            });
+
+            // Add event listeners for "More Info" buttons
+            var moreInfoBtns = document.querySelectorAll(".more-info-btn");
+            moreInfoBtns.forEach(function(btn) {
+                btn.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    var carIndex = parseInt(btn.getAttribute("data-index"));
+                    var car = cars[carIndex];
+                    displayMoreInfo(car);
+                });
             });
         }
 
@@ -198,7 +216,7 @@
                     carIndices.push(parseInt(checkbox.getAttribute("data-index")));
                 });
 
-                // Display more info modal with compared cars
+                // Display compare modal with compared cars
                 displayComparedCars(carIndices);
             } else {
                 alert("Please select exactly two cars to compare.");
@@ -222,8 +240,8 @@
                 compareContainer.appendChild(carDetails);
             });
 
-            // Show the modal
-            var modal = document.getElementById("moreInfoModal");
+            // Show the compare modal
+            var modal = document.getElementById("compareModal");
             modal.style.display = "block";
         }
 
@@ -231,16 +249,42 @@
         var modal = document.getElementById("moreInfoModal");
         var moreInfoContent = document.getElementById("moreInfoContent");
 
-        // Event listener for "Close" button in the modal
+        // Event listener for "Close" button in the more info modal
         var closeBtn = document.getElementsByClassName("close")[0];
         closeBtn.onclick = function() {
             modal.style.display = "none";
         };
 
-        // Event listener for clicking outside the modal to close it
+        // Event listener for clicking outside the more info modal to close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            }
+        };
+
+        // Function to display more info modal
+        function displayMoreInfo(car) {
+            moreInfoContent.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
+                                        "<strong>Model:</strong> " + car.model + "<br>" +
+                                        "<strong>Year:</strong> " + car.year + "<br>" +
+                                        "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
+                                        "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles";
+            modal.style.display = "block";
+        }
+
+        // Compare Modal
+        var compareModal = document.getElementById("compareModal");
+
+        // Event listener for closing the compare modal
+        var compareCloseBtn = compareModal.getElementsByClassName("close")[0];
+        compareCloseBtn.onclick = function() {
+            compareModal.style.display = "none";
+        };
+
+        // Event listener for clicking outside the compare modal to close it
+        window.onclick = function(event) {
+            if (event.target == compareModal) {
+                compareModal.style.display = "none";
             }
         };
     </script>
