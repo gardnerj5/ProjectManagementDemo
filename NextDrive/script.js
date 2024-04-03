@@ -16,14 +16,11 @@ var cars = [
     { make: "BMW", model: "i8", year: 2020, price: 120000, mileage: 8000, image: "https://edgecast-img.yahoo.net/mysterio/api/755BA9410AFA2DC2CBB66700E7CE40399442E031846E1D027F880A499790591E/autoblog/resizefill_w660_h372;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USC90BMC681A021001.jpg" },
     { make: "Audi", model: "A6", year: 2014, price: 15000, mileage: 146000, image: "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9033/2014-Audi-A6-front_9033_032_1811x732_L8L8_cropped.png" },
     { make: "Mercedes-Benz", model: "A-Class", year: 2022, price: 70000, mileage: 1000, image: "https://www.motortrend.com/uploads/sites/10/2021/12/2022-mercedes-benz-a-class-a220-sedan-angular-front.png" },
-    { make: "Toyota", model: "Camry", year: 2020, price: 25000, mileage: 30000, image: "https://www.cars.com/i/large/in/v2/stock_photos/36f04758-5aab-42bc-912c-8e3420db060d/d5c9cc6a-43e6-4128-9154-17ff7f67955b.png" },
-    { make: "Honda", model: "Accord", year: 2019, price: 27000, mileage: 25000, image: "https://mystrongad.com/BRH_BrannonHonda/BRH_Interactive/Accord/2019/2019-Accord-Crystal-Black-Pearl.png" },
-    { make: "Ford", model: "F-150", year: 2021, price: 35000, mileage: 15000, image: "https://www.iihs.org/cdn-cgi/image/width=636/api/ratings/model-year-images/3116/" },
-    { make: "Tesla", model: "Model S", year: 2022, price: 80000, mileage: 10000, image: "https://file.kelleybluebookimages.com/kbb/base/evox/CP/50747/2022-Tesla-Model%20S-front_50747_032_2400x1800_PPSW.png" },
-    { make: "Chevrolet", model: "Camaro", year: 2018, price: 40000, mileage: 20000, image: "https://edgecast-img.yahoo.net/mysterio/api/0DF31EEB3F81328E065798C5D95022D64A53719054FFF0FB1117F8ED734024FB/autoblog/resizefill_w660_h372;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USC60CHC021A021001.jpg" },
-    { make: "BMW", model: "X5", year: 2020, price: 60000, mileage: 18000, image: "https://www.cars.com/i/large/in/v2/stock_photos/87d4aa58-73fc-4589-940e-ac591afe1ebe/c6bd19b4-fd98-4670-9614-3e49408dfd3a.png" },
-    { make: "Audi", model: "A4", year: 2019, price: 45000, mileage: 22000, image: "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/model-years/15099-2023-audi-a4" },
-    { make: "Mercedes-Benz", model: "C-Class", year: 2021, price: 55000, mileage: 12000, image: "https://www.mbusa.com/content/dam/mb-nafta/us/myco/my24/c-class/class-page/series/2024-C-SEDAN-CT-1-6-01-DR.jpg" }
+    { make: "Lamborghini", model: "Adventador", year: 2022, price: 300000, mileage: 1000, image: "https://cdn-ds.com/blogs-media/sites/94/2021/12/28113104/2022-Lamborghini-Aventador-A_o.jpg" },
+    { make: "Ferrari", model: "LaFerrari", year: 2015, price: 1000000, mileage: 5000, image: "https://cdn.ferrari.com/cms/network/media/img/resize/5ddb97392cdb32285a799dfa-laferrari-2013-share?width=1080" },
+    { make: "Porche", model: "911", year: 2024, price: 400000, mileage: 1000, image: "https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" },
+    { make: "Tesla", model: "CyberTruck", year: 2023, price: 100000, mileage: 1000, image: "https://www.topgear.com/sites/default/files/news-listicle/image/2024/02/Tesla%20Cybertruck.jpeg" },
+    
 ];
 
 // Function to display cars
