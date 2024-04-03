@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Car Information</title>
     <style>
-        /* CSS for styling the car rows and modal */
         /* CSS for styling the car rows */
         .car-row {
             border-bottom: 1px solid #ccc;
@@ -64,33 +63,51 @@
         <label for="makeFilter">Make:</label>
         <select id="makeFilter">
             <option value="">All</option>
-            <!-- Options for make -->
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Ford">Ford</option>
+            <option value="Tesla">Tesla</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="BMW">BMW</option>
+            <option value="Audi">Audi</option>
+            <option value="Mercedes-Benz">Mercedes-Benz</option>
         </select>
-
+        
         <label for="modelFilter">Model:</label>
         <select id="modelFilter">
             <option value="">All</option>
-            <!-- Options for model -->
+            <option value="Camry">Camry</option>
+            <option value="Accord">Accord</option>
+            <option value="F-150">F-150</option>
+            <option value="Model S">Model S</option>
+            <option value="Camaro">Camaro</option>
+            <option value="X5">X5</option>
+            <option value="A4">A4</option>
+            <option value="C-Class">C-Class</option>
         </select>
-
+        
         <label for="yearFilter">Year:</label>
         <select id="yearFilter">
             <option value="">All</option>
-            <!-- Options for year -->
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
         </select>
-
+        
         <label for="priceMin">Price Min:</label>
         <input type="number" id="priceMin" min="0">
-
+        
         <label for="priceMax">Price Max:</label>
         <input type="number" id="priceMax" min="0">
-
+        
         <label for="mileageMin">Mileage Min:</label>
         <input type="number" id="mileageMin" min="0">
-
+        
         <label for="mileageMax">Mileage Max:</label>
         <input type="number" id="mileageMax" min="0">
-
+        
         <label for="sortBy">Sort by:</label>
         <select id="sortBy">
             <option value="make">Make</option>
@@ -105,6 +122,17 @@
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
         </select>
+    
+
+        <!-- Other filter elements -->
+
+        <!-- "More Info" Modal -->
+        <div id="moreInfoModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="moreInfoContent"></div>
+            </div>
+        </div>
     </div>
 
     <div id="carList">
@@ -123,112 +151,116 @@
             { make: "Audi", model: "A4", year: 2019, price: 45000, mileage: 22000, image: "https://via.placeholder.com/150" },
             { make: "Mercedes-Benz", model: "C-Class", year: 2021, price: 55000, mileage: 12000, image: "https://via.placeholder.com/150" }
         ];
-
+        
         // Function to display cars
         function displayCars(cars) {
             var carList = document.getElementById("carList");
             carList.innerHTML = ""; // Clear previous content
-
+            
             cars.forEach(function(car, index) {
                 var carDiv = document.createElement("div");
                 carDiv.classList.add("car-row"); // Add class for styling
                 carDiv.innerHTML = "<img src='" + car.image + "' class='car-image'>" +
-                                   "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
-                                   "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
-                                   "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
-                                   "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
-                                   "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>" +
-                                   "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; // Add More Info button
-
+                "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
+                "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
+                "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
+                "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
+                "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>" +
+                "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; // Add More Info button
+                
                 carList.appendChild(carDiv);
             });
+            
+            // Reattach event listeners for "More Info" buttons
+            attachMoreInfoEventListeners();
         }
-
+        
+        // Function to attach event listeners for "More Info" buttons
+        function attachMoreInfoEventListeners() {
+            var moreInfoBtns = document.querySelectorAll(".more-info-btn");
+            moreInfoBtns.forEach(function(btn) {
+                btn.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    var carIndex = parseInt(btn.getAttribute("data-index"));
+                    var car = cars[carIndex];
+                    displayMoreInfo(car);
+                });
+            });
+        }
+        
         // Initial display
         displayCars(cars);
-
-        // Function to filter cars based on selected criteria
-        function filterCars() {
-            var makeFilter = document.getElementById("makeFilter").value;
-            var modelFilter = document.getElementById("modelFilter").value;
-            var yearFilter = document.getElementById("yearFilter").value;
-            var priceMin = parseFloat(document.getElementById("priceMin").value);
-            var priceMax = parseFloat(document.getElementById("priceMax").value);
-            var mileageMin = parseFloat(document.getElementById("mileageMin").value);
-            var mileageMax = parseFloat(document.getElementById("mileageMax").value);
-
+        
+        // Event listeners for filter selects and inputs
+        var makeFilter = document.getElementById("makeFilter");
+        var modelFilter = document.getElementById("modelFilter");
+        var yearFilter = document.getElementById("yearFilter");
+        var priceMin = document.getElementById("priceMin");
+        var priceMax = document.getElementById("priceMax");
+        var mileageMin = document.getElementById("mileageMin");
+        var mileageMax = document.getElementById("mileageMax");
+        var sortBy = document.getElementById("sortBy");
+        var sortOrder = document.getElementById("sortOrder");
+        
+        [makeFilter, modelFilter, yearFilter, priceMin, priceMax, mileageMin, mileageMax, sortBy, sortOrder].forEach(function(element) {
+            element.addEventListener("change", filterAndSort);
+        });
+        
+        // Function to filter and sort cars
+        function filterAndSort() {
             var filteredCars = cars.filter(function(car) {
-                return (makeFilter === "" || car.make === makeFilter) &&
-                       (modelFilter === "" || car.model === modelFilter) &&
-                       (yearFilter === "" || car.year.toString() === yearFilter) &&
-                       (isNaN(priceMin) || car.price >= priceMin) &&
-                       (isNaN(priceMax) || car.price <= priceMax) &&
-                       (isNaN(mileageMin) || car.mileage >= mileageMin) &&
-                       (isNaN(mileageMax) || car.mileage <= mileageMax);
+                return (makeFilter.value === "" || car.make === makeFilter.value) &&
+                (modelFilter.value === "" || car.model === modelFilter.value) &&
+                (yearFilter.value === "" || car.year == yearFilter.value) &&
+                (priceMin.value === "" || car.price >= parseInt(priceMin.value)) &&
+                (priceMax.value === "" || car.price <= parseInt(priceMax.value)) &&
+                (mileageMin.value === "" || car.mileage >= parseInt(mileageMin.value)) &&
+                (mileageMax.value === "" || car.mileage <= parseInt(mileageMax.value));
             });
-
-            // Sort the filtered cars
-            var sortBy = document.getElementById("sortBy").value;
-            var sortOrder = document.getElementById("sortOrder").value;
+            
+            // Sorting
+            var sortByValue = sortBy.value;
+            var sortOrderValue = sortOrder.value;
+            
             filteredCars.sort(function(a, b) {
-                if (sortOrder === "asc") {
-                    return a[sortBy] > b[sortBy] ? 1 : -1;
+                if (sortOrderValue === "asc") {
+                    return a[sortByValue] - b[sortByValue];
                 } else {
-                    return a[sortBy] < b[sortBy] ? 1 : -1;
+                    return b[sortByValue] - a[sortByValue];
                 }
             });
-
+            
             displayCars(filteredCars);
         }
-
-        // Event listeners for filter selects and inputs
-        document.getElementById("makeFilter").addEventListener("change", filterCars);
-        document.getElementById("modelFilter").addEventListener("change", filterCars);
-        document.getElementById("yearFilter").addEventListener("change", filterCars);
-        document.getElementById("priceMin").addEventListener("input", filterCars);
-        document.getElementById("priceMax").addEventListener("input", filterCars);
-        document.getElementById("mileageMin").addEventListener("input", filterCars);
-        document.getElementById("mileageMax").addEventListener("input", filterCars);
-        document.getElementById("sortBy").addEventListener("change", filterCars);
-        document.getElementById("sortOrder").addEventListener("change", filterCars);
-
+        
         // More Info Modal
         var modal = document.getElementById("moreInfoModal");
         var moreInfoContent = document.getElementById("moreInfoContent");
-
+        
         // Event listener for "Close" button in the modal
         var closeBtn = document.getElementsByClassName("close")[0];
         closeBtn.onclick = function() {
             modal.style.display = "none";
         };
-
+        
         // Event listener for clicking outside the modal to close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         };
-
+        
         // Function to display more info modal
         function displayMoreInfo(car) {
             moreInfoContent.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
-                                        "<strong>Model:</strong> " + car.model + "<br>" +
-                                        "<strong>Year:</strong> " + car.year + "<br>" +
-                                        "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
-                                        "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles";
+            "<strong>Model:</strong> " + car.model + "<br>" +
+            "<strong>Year:</strong> " + car.year + "<br>" +
+            "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
+            "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles";
             modal.style.display = "block";
         }
-
-        // Add event listeners for "More Info" buttons
-        var moreInfoBtns = document.querySelectorAll(".more-info-btn");
-        moreInfoBtns.forEach(function(btn) {
-            btn.addEventListener("click", function(event) {
-                event.stopPropagation();
-                var carIndex = parseInt(btn.getAttribute("data-index"));
-                var car = cars[carIndex];
-                displayMoreInfo(car);
-            });
-        });
     </script>
+
+
 </body>
 </html>
