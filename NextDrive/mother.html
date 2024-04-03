@@ -2,25 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web Page with Buttons and Images</title>
+    <title>Car Information</title>
     <link rel="stylesheet" type="text/css" href="format.css">
 </head>
 <body>
-    <h1 class = "least">Welcome to My Web Page</h1>
+    <h1>Welcome to Car Information</h1>
 
-    <button>Sedan</button>
-    <button>SUV</button>
-    <button>Truck</button>
+    <div>
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect">
+            <option value="make">Make</option>
+            <option value="model">Model</option>
+            <option value="year">Year</option>
+        </select>
+    </div>
 
-    <label for="mySelect">Choose an option:</label>
-    <select name="mySelect">
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-    </select>
+    <div id="carList">
+        <!-- Car information will be dynamically added here -->
+    </div>
 
-    <img src="https://via.placeholder.com/150" alt="Image 2">
-    <img src="https://via.placeholder.com/150" alt="Image 3">
-    <img src="https://via.placeholder.com/150" alt="Image 3">
+    <script>
+        // Sample car data
+        var cars = [
+            { make: "Toyota", model: "Camry", year: 2020 },
+            { make: "Honda", model: "Accord", year: 2019 },
+            { make: "Ford", model: "F-150", year: 2021 },
+            { make: "Tesla", model: "Model S", year: 2022 },
+            { make: "Chevrolet", model: "Camaro", year: 2018 },
+            { make: "BMW", model: "X5", year: 2020 },
+            { make: "Audi", model: "A4", year: 2019 },
+            { make: "Mercedes-Benz", model: "C-Class", year: 2021 }
+        ];
+
+        // Function to display cars
+        function displayCars(cars) {
+            var carList = document.getElementById("carList");
+            carList.innerHTML = ""; // Clear previous content
+
+            cars.forEach(function(car) {
+                var carDiv = document.createElement("div");
+                carDiv.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
+                                   "<strong>Model:</strong> " + car.model + "<br>" +
+                                   "<strong>Year:</strong> " + car.year + "<br><br>";
+                carList.appendChild(carDiv);
+            });
+        }
+
+        // Initial display
+        displayCars(cars);
+
+        // Function to sort cars based on selected criteria
+        document.getElementById("sortSelect").addEventListener("change", function() {
+            var sortBy = this.value;
+            var sortedCars = cars.slice().sort(function(a, b) {
+                return a[sortBy] > b[sortBy] ? 1 : -1;
+            });
+            displayCars(sortedCars);
+        });
+    </script>
 </body>
 </html>
