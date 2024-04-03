@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Purchase Checkout</title>
+</head>
+<body>
+    <h1>Car Purchase Checkout</h1>
+    <form action="/submit_purchase" method="post">
+        <h2>Payment Information</h2>
+        <label for="cardName">Name on Card:</label><br>
+        <input type="text" id="cardName" name="cardName" required><br>
+        <label for="cardNumber">Credit Card Number:</label><br>
+        <input type="text" id="cardNumber" name="cardNumber" required><br>
+        <label for="expiryDate">Expiry Date:</label><br>
+        <input type="text" id="expiryDate" name="expiryDate" required><br>
+        <label for="cvv">CVV:</label><br>
+        <input type="text" id="cvv" name="cvv" required><br>
+
+        <h2>Driver's License Information</h2>
+        <label for="licenseNumber">License Number:</label><br>
+        <input type="text" id="licenseNumber" name="licenseNumber" required><br>
+        <label for="licenseExpiry">License Expiry Date:</label><br>
+        <input type="text" id="licenseExpiry" name="licenseExpiry" required><br>
+
+        <p>Note: Credit and driver's licenses must be approved.</p>
+
+        <input type="submit" value="Confirm Purchase">
+    </form>
+</body>
+</html>
