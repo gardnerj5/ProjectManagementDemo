@@ -65,6 +65,31 @@ function compareSelectedCars() {
     }
 }
 
+function filterCars() {
+    var makeFilter = document.getElementById("makeFilter").value;
+    
+    var filteredCars = cars.filter(function(car) {
+        var passMake = makeFilter === "" || car.make === makeFilter;
+        return passMake;
+    });
+    
+    var sortBy = document.getElementById("sortBy").value;
+    var sortOrder = document.getElementById("sortOrder").value;
+    filteredCars.sort(function(a, b) {
+        if (sortOrder === "asc") {
+            return a[sortBy] > b[sortBy] ? 1 : -1;
+        } else {
+            return a[sortBy] < b[sortBy] ? 1 : -1;
+        }
+    });
+    
+    displayCars(filteredCars);
+}
+
+document.getElementById("makeFilter").addEventListener("change", filterCars);
+document.getElementById("sortBy").addEventListener("change", filterCars);
+document.getElementById("sortOrder").addEventListener("change", filterCars);
+
 // Function to display compared car details
 function displayComparedCars(carIndices) {
     var compareContainer = document.getElementById("compareContainer");
