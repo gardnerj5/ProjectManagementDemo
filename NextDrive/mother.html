@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Information</title>
-    <link rel="stylesheet" type="text/css" href="format.css">
+    <style>
+        /* CSS for styling the car rows */
+        .car-row {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .car-info {
+            flex: 1;
+            padding: 0 10px;
+        }
+        .car-image {
+            max-width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Car Information</h1>
@@ -22,16 +39,16 @@
     </div>
 
     <script>
-        // Sample car data
+        // Sample car data with placeholder image URLs
         var cars = [
-            { make: "Toyota", model: "Camry", year: 2020 },
-            { make: "Honda", model: "Accord", year: 2019 },
-            { make: "Ford", model: "F-150", year: 2021 },
-            { make: "Tesla", model: "Model S", year: 2022 },
-            { make: "Chevrolet", model: "Camaro", year: 2018 },
-            { make: "BMW", model: "X5", year: 2020 },
-            { make: "Audi", model: "A4", year: 2019 },
-            { make: "Mercedes-Benz", model: "C-Class", year: 2021 }
+            { make: "Toyota", model: "Camry", year: 2020, image: "https://via.placeholder.com/150" },
+            { make: "Honda", model: "Accord", year: 2019, image: "https://via.placeholder.com/150" },
+            { make: "Ford", model: "F-150", year: 2021, image: "https://via.placeholder.com/150" },
+            { make: "Tesla", model: "Model S", year: 2022, image: "https://via.placeholder.com/150" },
+            { make: "Chevrolet", model: "Camaro", year: 2018, image: "https://via.placeholder.com/150" },
+            { make: "BMW", model: "X5", year: 2020, image: "https://via.placeholder.com/150" },
+            { make: "Audi", model: "A4", year: 2019, image: "https://via.placeholder.com/150" },
+            { make: "Mercedes-Benz", model: "C-Class", year: 2021, image: "https://via.placeholder.com/150" }
         ];
 
         // Function to display cars
@@ -41,9 +58,11 @@
 
             cars.forEach(function(car) {
                 var carDiv = document.createElement("div");
-                carDiv.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
-                                   "<strong>Model:</strong> " + car.model + "<br>" +
-                                   "<strong>Year:</strong> " + car.year + "<br><br>";
+                carDiv.classList.add("car-row"); // Add class for styling
+                carDiv.innerHTML = "<img src='" + car.image + "' class='car-image'>" +
+                                   "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
+                                   "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
+                                   "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>";
                 carList.appendChild(carDiv);
             });
         }
