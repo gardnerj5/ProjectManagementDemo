@@ -17,3 +17,15 @@ body {
     font-weight: bold;
     text-align: center;
 }
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+.section {
+    margin-bottom: 20px;
+}
+.employee {
+    width: 100px;
+    height: 100px;
+}
