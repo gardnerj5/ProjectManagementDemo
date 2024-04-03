@@ -11,21 +11,78 @@ body {
     padding: 20px;
 }
 
-.least{
-    font-size: 48px;
-    color: #333;
-    font-weight: bold;
-    text-align: center;
+/*.least{*/
+/*  font-size: 48px;*/
+/*  color: #333;*/
+/*  font-weight: bold;*/
+/*  text-align: center;*/
+/*}*/
+/**/
+/*.container {*/
+/*  width: 80%;*/
+/*  margin: auto;*/
+/*}*/
+/*.section {*/
+/*  margin-bottom: 20px;*/
+/*}*/
+/*.employee {*/
+/*  width: 100px;*/
+/*  height: 100px;*/
+/*}*/
+.car-row {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Change cursor to indicate interactivity */
+    transition: max-height 0.5s ease; /* Apply transition effect */
+    overflow: hidden; /* Hide overflow content */
+    position: relative; /* Enable absolute positioning for expanded info */
 }
-
-.container {
+.car-info {
+    flex: 1;
+    padding: 0 10px;
+}
+.car-image {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
     width: 80%;
-    margin: auto;
 }
-.section {
-    margin-bottom: 20px;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
-.employee {
-    width: 100px;
-    height: 100px;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+.compare-container {
+    display: flex;
+    justify-content: space-around;
+}
+.car-details {
+    flex: 1;
+    padding: 0 10px;
 }
