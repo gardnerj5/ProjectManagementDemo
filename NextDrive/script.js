@@ -132,12 +132,14 @@ window.onclick = function(event) {
 // Function to display more info modal
 function displayMoreInfo(car) {
     moreInfoContent.innerHTML = "<strong>Make:</strong> " + car.make + "<br>" +
-                                "<strong>Model:</strong> " + car.model + "<br>" +
-                                "<strong>Year:</strong> " + car.year + "<br>" +
-                                "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
-                                "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles";
+    "<strong>Model:</strong> " + car.model + "<br>" +
+    "<strong>Year:</strong> " + car.year + "<br>" +
+    "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
+    "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles<br>" +
+    "<a href='purchase.html' target='_blank'>Purchase car</a>"; // Added Purchase car link
     modal.style.display = "block";
 }
+
 
 // Compare Modal
 var compareModal = document.getElementById("compareModal");
