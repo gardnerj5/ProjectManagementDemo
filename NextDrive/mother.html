@@ -67,6 +67,27 @@
 
         <label for="priceMax">Price Max:</label>
         <input type="number" id="priceMax" min="0">
+
+        <label for="mileageMin">Mileage Min:</label>
+        <input type="number" id="mileageMin" min="0">
+
+        <label for="mileageMax">Mileage Max:</label>
+        <input type="number" id="mileageMax" min="0">
+
+        <label for="sortBy">Sort by:</label>
+        <select id="sortBy">
+            <option value="make">Make</option>
+            <option value="model">Model</option>
+            <option value="year">Year</option>
+            <option value="price">Price</option>
+            <option value="mileage">Mileage</option>
+        </select>
+        
+        <label for="sortOrder">Sort order:</label>
+        <select id="sortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
     </div>
 
     <div id="carList">
@@ -76,14 +97,14 @@
     <script>
         // Sample car data with placeholder image URLs
         var cars = [
-            { make: "Toyota", model: "Camry", year: 2020, price: 25000, image: "https://via.placeholder.com/150" },
-            { make: "Honda", model: "Accord", year: 2019, price: 27000, image: "https://via.placeholder.com/150" },
-            { make: "Ford", model: "F-150", year: 2021, price: 35000, image: "https://via.placeholder.com/150" },
-            { make: "Tesla", model: "Model S", year: 2022, price: 80000, image: "https://via.placeholder.com/150" },
-            { make: "Chevrolet", model: "Camaro", year: 2018, price: 40000, image: "https://via.placeholder.com/150" },
-            { make: "BMW", model: "X5", year: 2020, price: 60000, image: "https://via.placeholder.com/150" },
-            { make: "Audi", model: "A4", year: 2019, price: 45000, image: "https://via.placeholder.com/150" },
-            { make: "Mercedes-Benz", model: "C-Class", year: 2021, price: 55000, image: "https://via.placeholder.com/150" }
+            { make: "Toyota", model: "Camry", year: 2020, price: 25000, mileage: 30000, image: "https://via.placeholder.com/150" },
+            { make: "Honda", model: "Accord", year: 2019, price: 27000, mileage: 25000, image: "https://via.placeholder.com/150" },
+            { make: "Ford", model: "F-150", year: 2021, price: 35000, mileage: 15000, image: "https://via.placeholder.com/150" },
+            { make: "Tesla", model: "Model S", year: 2022, price: 80000, mileage: 10000, image: "https://via.placeholder.com/150" },
+            { make: "Chevrolet", model: "Camaro", year: 2018, price: 40000, mileage: 20000, image: "https://via.placeholder.com/150" },
+            { make: "BMW", model: "X5", year: 2020, price: 60000, mileage: 18000, image: "https://via.placeholder.com/150" },
+            { make: "Audi", model: "A4", year: 2019, price: 45000, mileage: 22000, image: "https://via.placeholder.com/150" },
+            { make: "Mercedes-Benz", model: "C-Class", year: 2021, price: 55000, mileage: 12000, image: "https://via.placeholder.com/150" }
         ];
 
         // Function to display cars
@@ -98,7 +119,8 @@
                                    "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
                                    "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
                                    "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
-                                   "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>";
+                                   "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
+                                   "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>";
                 carList.appendChild(carDiv);
             });
         }
@@ -113,13 +135,17 @@
             var yearFilter = document.getElementById("yearFilter").value;
             var priceMin = parseFloat(document.getElementById("priceMin").value);
             var priceMax = parseFloat(document.getElementById("priceMax").value);
+            var mileageMin = parseFloat(document.getElementById("mileageMin").value);
+            var mileageMax = parseFloat(document.getElementById("mileageMax").value);
 
             var filteredCars = cars.filter(function(car) {
                 return (makeFilter === "" || car.make === makeFilter) &&
                        (modelFilter === "" || car.model === modelFilter) &&
                        (yearFilter === "" || car.year.toString() === yearFilter) &&
                        (isNaN(priceMin) || car.price >= priceMin) &&
-                       (isNaN(priceMax) || car.price <= priceMax);
+                       (isNaN(priceMax) || car.price <= priceMax) &&
+                       (isNaN(mileageMin) || car.mileage >= mileageMin) &&
+                       (isNaN(mileageMax) || car.mileage <= mileageMax);
             });
 
             displayCars(filteredCars);
@@ -131,6 +157,38 @@
         document.getElementById("yearFilter").addEventListener("change", filterCars);
         document.getElementById("priceMin").addEventListener("input", filterCars);
         document.getElementById("priceMax").addEventListener("input", filterCars);
+        document.getElementById("mileageMin").addEventListener("input", filterCars);
+        document.getElementById("mileageMax").addEventListener("input", filterCars);
+
+        // Event listener for sorting
+        document.getElementById("sortBy").addEventListener("change", function() {
+            filterCars(); // Reapply filters before sorting
+            var sortBy = this.value;
+            var sortOrder = document.getElementById("sortOrder").value;
+            var sortedCars = cars.slice().sort(function(a, b) {
+                if (sortOrder === "asc") {
+                    return a[sortBy] > b[sortBy] ? 1 : -1;
+                } else {
+                    return a[sortBy] < b[sortBy] ? 1 : -1;
+                }
+            });
+            displayCars(sortedCars);
+        });
+
+        // Event listener for sort order
+        document.getElementById("sortOrder").addEventListener("change", function() {
+            filterCars(); // Reapply filters before sorting
+            var sortBy = document.getElementById("sortBy").value;
+            var sortOrder = this.value;
+            var sortedCars = cars.slice().sort(function(a, b) {
+                if (sortOrder === "asc") {
+                    return a[sortBy] > b[sortBy] ? 1 : -1;
+                } else {
+                    return a[sortBy] < b[sortBy] ? 1 : -1;
+                }
+            });
+            displayCars(sortedCars);
+        });
     </script>
 </body>
 </html>
