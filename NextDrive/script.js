@@ -109,15 +109,22 @@ function displayComparedCars(carIndices) {
     var compareContainer = document.getElementById("compareContainer");
     compareContainer.innerHTML = ""; // Clear previous content
     
-    carIndices.forEach(function(index) {
+    var referenceCar = cars[carIndices[0]]; // First car in comparison
+    
+    carIndices.forEach(function(index, i) {
         var car = cars[index];
+        var comparisonIndex = (i === 0) ? 1 : 0; // Get the index for comparison
+        
+        var comparisonCar = cars[carIndices[comparisonIndex]]; // Car for comparison
+        
         var carDetails = document.createElement("div");
         carDetails.classList.add("car-details");
+        
         carDetails.innerHTML = "<img src='" + car.image + "' class='car-image'>" + // Add car image
         "<h2>" + car.make + " " + car.model + "</h2>" +
-        "<p><strong>Year:</strong> " + car.year + "</p>" +
-        "<p><strong>Price:</strong> $" + car.price.toLocaleString() + "</p>" +
-        "<p><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</p>";
+        "<p><strong>Year:</strong> <span class='" + (car.year > comparisonCar.year ? "highlight-green" : "highlight-red") + "'>" + car.year + "</span></p>" +
+        "<p><strong>Price:</strong> <span class='" + (car.price < comparisonCar.price ? "highlight-green" : "highlight-red") + "'>$" + car.price.toLocaleString() + "</span></p>" +
+        "<p><strong>Mileage:</strong> <span class='" + (car.mileage < comparisonCar.mileage ? "highlight-green" : "highlight-red") + "'>" + car.mileage.toLocaleString() + " miles</span></p>";
         
         compareContainer.appendChild(carDetails);
     });
@@ -126,6 +133,8 @@ function displayComparedCars(carIndices) {
     var modal = document.getElementById("compareModal");
     modal.style.display = "block";
 }
+
+
 
 // More Info Modal
 var modal = document.getElementById("moreInfoModal");
