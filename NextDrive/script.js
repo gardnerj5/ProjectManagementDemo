@@ -66,29 +66,43 @@ function compareSelectedCars() {
 }
 
 function filterCars() {
+    
     var makeFilter = document.getElementById("makeFilter").value;
+    var modelFilter = document.getElementById("modelFilter").value;
+    var yearFilter = document.getElementById("yearFilter").value;
+    var priceMin = parseInt(document.getElementById("priceMin").value) || 0;
+    var priceMax = parseInt(document.getElementById("priceMax").value) || Infinity;
+    var mileageMin = parseInt(document.getElementById("mileageMin").value) || 0;
+    var mileageMax = parseInt(document.getElementById("mileageMax").value) || Infinity;
     
     var filteredCars = cars.filter(function(car) {
         var passMake = makeFilter === "" || car.make === makeFilter;
-        return passMake;
-    });
-    
-    var sortBy = document.getElementById("sortBy").value;
-    var sortOrder = document.getElementById("sortOrder").value;
-    filteredCars.sort(function(a, b) {
-        if (sortOrder === "asc") {
-            return a[sortBy] > b[sortBy] ? 1 : -1;
-        } else {
-            return a[sortBy] < b[sortBy] ? 1 : -1;
-        }
+        var passModel = modelFilter === "" || car.model === modelFilter;
+        var passYear = yearFilter === "" || car.year.toString() === yearFilter;
+        var passPrice = car.price >= priceMin && car.price <= priceMax;
+        var passMileage = car.mileage >= mileageMin && car.mileage <= mileageMax;
+        
+        return passMake && passModel && passYear && passPrice && passMileage;
     });
     
     displayCars(filteredCars);
 }
 
+
+
+
+
+// Add event listeners for all filter inputs
 document.getElementById("makeFilter").addEventListener("change", filterCars);
+document.getElementById("modelFilter").addEventListener("change", filterCars);
+document.getElementById("yearFilter").addEventListener("change", filterCars);
+document.getElementById("priceMin").addEventListener("input", filterCars);
+document.getElementById("priceMax").addEventListener("input", filterCars);
+document.getElementById("mileageMin").addEventListener("input", filterCars);
+document.getElementById("mileageMax").addEventListener("input", filterCars);
 document.getElementById("sortBy").addEventListener("change", filterCars);
 document.getElementById("sortOrder").addEventListener("change", filterCars);
+
 
 // Function to display compared car details
 function displayComparedCars(carIndices) {
