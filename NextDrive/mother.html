@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Car Information</title>
+    <title>NextDrive</title>
     <link rel="stylesheet" href="format.css">
 </head>
 <table class="tablemother">
 <!--   comment-->
     <body>
     <h1><img src="images/NextDriveLogo.png" class="logo" alt="NextDrive Logo"></h1>
-</table>
+<!--</table>-->
 <table class = "intro">
     <div class = "brilliant">
-        <button id="showFiltersBtn">Show Filters</button><button id="compareBtn">Compare</button><button id="aboutBtn" class="align-right">About NextDrive</button>
+        <button id="showFiltersBtn">Filters</button><button id="compareBtn">Compare</button><button id="aboutBtn" class="align-right">About NextDrive</button>
         
         
         <div id="filtersContainer" class="filters-container hidden">
-        <label for="search">Search by:</label>
+        <div class="filters-box">    
+        <label for="search"><strong>Search by:</strong></label>
     
         <br>
         <label for="makeFilter">Make:</label>
@@ -34,7 +35,7 @@
             <option value="Ferrari">Ferrari</option>
             <option value="Porche">Porche</option>
         </select>
-        
+        <br>
         <label for="modelFilter">Model:</label>
         <select id="modelFilter">
             <option value="">All</option>
@@ -78,7 +79,8 @@
 
 
         <div class = "smarter">
-        <label for="sortBy">Sort by:</label>
+        <label for="sortBy"><strong>Sort by:</strong></label>
+        <br>
         <select id="sortBy">
             <option value="make">Make</option>
             <option value="model">Model</option>
@@ -94,8 +96,9 @@
         </select>
         </div>
     </div>
+        </div>
 </div>
-    </body>
+<!--</body>-->
 </table>
     <div id="carList">
         <!-- Car information with checkboxes and more info buttons -->
@@ -123,5 +126,5 @@
     <script src="script.js"></script>
 
 
-</html>
+<!--</html>-->
         

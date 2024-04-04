@@ -173,10 +173,9 @@ function displayMoreInfo(car) {
     "<strong>Year:</strong> " + car.year + "<br>" +
     "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
     "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles<br>" +
-    "<a href='purchase.html' class='purchase-btn'>Purchase car</a>"; // Changed to anchor tag
+    "<button class='purchase-btn'>Purchase car</button>"; // Changed to button
     modal.style.display = "block";
 }
-
 
 
 
