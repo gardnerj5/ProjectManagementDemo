@@ -17,6 +17,23 @@ body {
     padding: 20px;
 }
 
+body.mother {
+    background: linear-gradient(to bottom, #01374a, #01374a) top,
+                linear-gradient(to bottom, #bbedff, #bbedff) bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 450px, 100% 1950px; 
+    background-position: top, bottom;
+}
+
+select {
+    border-radius: 20px;
+}
+
+input[type="number"],
+input[type="text"] {
+    border-radius: 20px;
+}
+
 /* Logo */
 .logo {
     max-width: 15%;
@@ -26,9 +43,10 @@ body {
 /* Custom Class */
 .brilliant {
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
     font-weight: bold;
     text-align: left;
+    border-radius: 20px;
 }
 
 /* Car Rows */
@@ -41,6 +59,7 @@ body {
     transition: max-height 0.5s ease;
     overflow: hidden;
     position: relative;
+    border-radius: 20px;
 }
 
 /* Car Info */
