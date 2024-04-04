@@ -147,7 +147,8 @@ input[type="text"] {
     border-radius: 20px;
 }
 
-button {
+button,
+input[type="submit"] {
     border: none;
     outline: none;
     padding: 10px 20px;
