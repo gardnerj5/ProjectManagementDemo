@@ -201,3 +201,30 @@ table.intro{
 /*  margin-right: 20px; /* Adjust this value as needed */*/
 /*  comment*/
 }
+
+.purchase-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+/* Larger car image for More Info modal */
+.modal-content .car-image {
+    max-width: 300px; /* Adjust the max-width as needed */
+    height: auto;
+    margin-bottom: 20px; /* Add some margin to separate from other content */
+}
+
+/* Larger car image for Compare modal */
+.compare-container .car-image {
+    max-width: 200px; /* Adjust the max-width as needed */
+    height: auto;
+    margin-bottom: 20px; /* Add some margin to separate from other content */
+}

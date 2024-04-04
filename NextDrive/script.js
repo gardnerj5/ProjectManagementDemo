@@ -173,9 +173,11 @@ function displayMoreInfo(car) {
     "<strong>Year:</strong> " + car.year + "<br>" +
     "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
     "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles<br>" +
-    "<a href='purchase.html' target='_blank'>Purchase car</a>"; // Added Purchase car link
+    "<a href='purchase.html' class='purchase-btn'>Purchase car</a>"; // Changed to anchor tag
     modal.style.display = "block";
 }
+
+
 
 
 // Compare Modal
@@ -200,5 +202,8 @@ document.getElementById('showFiltersBtn').addEventListener('click', function() {
 });
 document.getElementById('aboutBtn').addEventListener('click', function() {
     window.location.href = 'info.html'; // Redirect to the info.html page
+});
+document.getElementById('purchase-btn').addEventListener('click', function() {
+    window.location.href = 'purchase.html'; // Redirect to the info.html page
 });
 //comment
