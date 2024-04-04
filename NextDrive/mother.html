@@ -5,126 +5,104 @@
     <title>NextDrive</title>
     <link rel="stylesheet" href="format.css">
 </head>
-<table class="tablemother">
-<!--   comment-->
-    <body>
-    <h1><img src="images/NextDriveLogo.png" class="logo" alt="NextDrive Logo"></h1>
-<!--</table>-->
-<table class = "intro">
-    <div class = "brilliant">
-        <button id="showFiltersBtn">Filters</button><button id="compareBtn">Compare</button><button id="aboutBtn" class="align-right">About NextDrive</button>
-        
-        
-        <div id="filtersContainer" class="filters-container hidden">
-        <div class="filters-box">    
-        <label for="search"><strong>Search by:</strong></label>
-    
-        <br>
-        <label for="makeFilter">Make:</label>
-        <select id="makeFilter">
-            <option value="">All</option>
-            <option value="Toyota">Toyota</option>
-            <option value="Honda">Honda</option>
-            <option value="Ford">Ford</option>
-            <option value="Tesla">Tesla</option>
-            <option value="Chevrolet">Chevrolet</option>
-            <option value="BMW">BMW</option>
-            <option value="Audi">Audi</option>
-            <option value="Mercedes-Benz">Mercedes-Benz</option>
-            <option value="Lamborghini">Lamborghini</option>
-            <option value="Ferrari">Ferrari</option>
-            <option value="Porche">Porche</option>
-        </select>
-        <br>
-        <label for="modelFilter">Model:</label>
-        <select id="modelFilter">
-            <option value="">All</option>
-            <option value="Camry">Camry</option>
-            <option value="Accord">Accord</option>
-            <option value="F-150">F-150</option>
-            <option value="Model S">Model S</option>
-            <option value="Camaro">Camaro</option>
-            <option value="X5">X5</option>
-            <option value="A4">A4</option>
-            <option value="C-Class">C-Class</option>
-            <option value="Adventador">Adventador</option>
-            <option value="LaFerrari">LaFerrari</option>
-            <option value="911">911</option>
-        </select>
-        
-        <label for="yearFilter">Year:</label>
-        <select id="yearFilter">
-            <option value="">All</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-        </select>
-        <br>
-        <label for="priceMin">Price Min:</label>
-        <input type="number" id="priceMin" min="0">
-        
-        <label for="priceMax">Price Max:</label>
-        <input type="number" id="priceMax" min="0">
-        <br>
-        <label for="mileageMin">Mileage Min:</label>
-        <input type="number" id="mileageMin" min="0">
-        
-        <label for="mileageMax">Mileage Max:</label>
-        <input type="number" id="mileageMax" min="0">
-        <br>
-
-
-        <div class = "smarter">
-        <label for="sortBy"><strong>Sort by:</strong></label>
-        <br>
-        <select id="sortBy">
-            <option value="make">Make</option>
-            <option value="model">Model</option>
-            <option value="year">Year</option>
-            <option value="price">Price</option>
-            <option value="mileage">Mileage</option>
-        </select>
-        
-        <label for="sortOrder">Sort order:</label>
-        <select id="sortOrder">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
+<body>
+    <table class="tablemother">
+        <h1><img src="images/NextDriveLogo.png" class="logo" alt="NextDrive Logo"></h1>
+    </table>
+    <table class="intro">
+        <div class="brilliant">
+            <button id="showFiltersBtn">Filters</button><button id="compareBtn">Compare</button><button id="aboutBtn" class="align-right">About NextDrive</button>
+            <div id="filtersContainer" class="filters-container hidden">
+                <div class="filters-box">    
+                    <label for="search"><strong>Search by:</strong></label>
+                    <br>
+                    <label for="makeFilter">Make:</label>
+                    <select id="makeFilter">
+                        <option value="">All</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Tesla">Tesla</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        <option value="Lamborghini">Lamborghini</option>
+                        <option value="Ferrari">Ferrari</option>
+                        <option value="Porche">Porche</option>
+                    </select>
+                    <br>
+                    <label for="modelFilter">Model:</label>
+                    <select id="modelFilter">
+                        <option value="">All</option>
+                        <option value="Camry">Camry</option>
+                        <option value="Accord">Accord</option>
+                        <option value="F-150">F-150</option>
+                        <option value="Model S">Model S</option>
+                        <option value="Camaro">Camaro</option>
+                        <option value="X5">X5</option>
+                        <option value="A4">A4</option>
+                        <option value="C-Class">C-Class</option>
+                        <option value="Adventador">Adventador</option>
+                        <option value="LaFerrari">LaFerrari</option>
+                        <option value="911">911</option>
+                    </select>
+                    <label for="yearFilter">Year:</label>
+                    <select id="yearFilter">
+                        <option value="">All</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                    </select>
+                    <br>
+                    <label for="priceMin">Price Min:</label>
+                    <input type="number" id="priceMin" min="0">
+                    <label for="priceMax">Price Max:</label>
+                    <input type="number" id="priceMax" min="0">
+                    <br>
+                    <label for="mileageMin">Mileage Min:</label>
+                    <input type="number" id="mileageMin" min="0">
+                    <label for="mileageMax">Mileage Max:</label>
+                    <input type="number" id="mileageMax" min="0">
+                    <br>
+                    <div class="smarter">
+                        <label for="sortBy"><strong>Sort by:</strong></label>
+                        <br>
+                        <select id="sortBy">
+                            <option value="make">Make</option>
+                            <option value="model">Model</option>
+                            <option value="year">Year</option>
+                            <option value="price">Price</option>
+                            <option value="mileage">Mileage</option>
+                        </select>
+                        <label for="sortOrder">Sort order:</label>
+                        <select id="sortOrder">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-        </div>
-</div>
-<!--</body>-->
-</table>
+    </table>
     <div id="carList">
-        <!-- Car information with checkboxes and more info buttons -->
     </div>
-
-    <!-- "Compare" button -->
-    
-
-    <!-- More Info Modal -->
     <div id="moreInfoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div id="moreInfoContent"></div>
         </div>
     </div>
-
-    <!-- Compare Modal -->
     <div id="compareModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div id="compareContainer" class="compare-container"></div>
         </div>
     </div>
-
     <script src="script.js"></script>
-
-
-<!--</html>-->
-        
+</body>
+</html>

@@ -1,4 +1,3 @@
-// Sample car data with placeholder image URLs
 var cars = [
     { make: "Toyota", model: "Camry", year: 2020, price: 25000, mileage: 30000, image: "https://www.cars.com/i/large/in/v2/stock_photos/36f04758-5aab-42bc-912c-8e3420db060d/d5c9cc6a-43e6-4128-9154-17ff7f67955b.png" },
     { make: "Honda", model: "Accord", year: 2019, price: 27000, mileage: 25000, image: "https://mystrongad.com/BRH_BrannonHonda/BRH_Interactive/Accord/2019/2019-Accord-Crystal-Black-Pearl.png" },
@@ -20,30 +19,27 @@ var cars = [
     { make: "Ferrari", model: "LaFerrari", year: 2015, price: 1000000, mileage: 5000, image: "https://cdn.ferrari.com/cms/network/media/img/resize/5ddb97392cdb32285a799dfa-laferrari-2013-share?width=1080" },
     { make: "Porche", model: "911", year: 2024, price: 400000, mileage: 1000, image: "https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" },
     { make: "Tesla", model: "CyberTruck", year: 2023, price: 100000, mileage: 1000, image: "https://www.topgear.com/sites/default/files/news-listicle/image/2024/02/Tesla%20Cybertruck.jpeg" },
-    
 ];
 
-// Function to display cars
 function displayCars(cars) { 
     var carList = document.getElementById("carList");
-    carList.innerHTML = ""; // Clear previous content
+    carList.innerHTML = ""; 
 
     cars.forEach(function(car, index) {
         var carDiv = document.createElement("div");
-        carDiv.classList.add("car-row"); // Add class for styling
-        carDiv.innerHTML = "<input type='checkbox' class='car-checkbox' data-index='" + index + "'>" + // Add checkbox
+        carDiv.classList.add("car-row"); 
+        carDiv.innerHTML = "<input type='checkbox' class='car-checkbox' data-index='" + index + "'>" + 
                            "<img src='" + car.image + "' class='car-image'>" +
                            "<div class='car-info'><strong>Make:</strong> " + car.make + "</div>" +
                            "<div class='car-info'><strong>Model:</strong> " + car.model + "</div>" +
                            "<div class='car-info'><strong>Year:</strong> " + car.year + "</div>" +
                            "<div class='car-info'><strong>Price:</strong> $" + car.price.toLocaleString() + "</div>" +
                            "<div class='car-info'><strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles</div>" +
-                           "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; // Add More Info button
+                           "<button class='more-info-btn' data-index='" + index + "'>More Info</button>"; 
 
         carList.appendChild(carDiv);
     });
 
-    // Add event listeners for "More Info" buttons
     var moreInfoBtns = document.querySelectorAll(".more-info-btn");
     moreInfoBtns.forEach(function(btn) {
         btn.addEventListener("click", function(event) {
@@ -55,14 +51,11 @@ function displayCars(cars) {
     });
 }
 
-// Initial display
 displayCars(cars);
 
-// Event listener for Compare button
 var compareBtn = document.getElementById("compareBtn");
 compareBtn.addEventListener("click", compareSelectedCars);
 
-// Function to compare selected cars
 function compareSelectedCars() {
     var checkedCheckboxes = document.querySelectorAll(".car-checkbox:checked");
     if (checkedCheckboxes.length === 2) {
@@ -71,7 +64,6 @@ function compareSelectedCars() {
             carIndices.push(parseInt(checkbox.getAttribute("data-index")));
         });
 
-        // Display compare modal with compared cars
         displayComparedCars(carIndices);
     } else {
         alert("Please select exactly two cars to compare.");
@@ -79,7 +71,6 @@ function compareSelectedCars() {
 }
 
 function filterCars() {
-    
     var makeFilter = document.getElementById("makeFilter").value;
     var modelFilter = document.getElementById("modelFilter").value;
     var yearFilter = document.getElementById("yearFilter").value;
@@ -101,11 +92,6 @@ function filterCars() {
     displayCars(filteredCars);
 }
 
-
-
-
-
-// Add event listeners for all filter inputs
 document.getElementById("makeFilter").addEventListener("change", filterCars);
 document.getElementById("modelFilter").addEventListener("change", filterCars);
 document.getElementById("yearFilter").addEventListener("change", filterCars);
@@ -116,24 +102,22 @@ document.getElementById("mileageMax").addEventListener("input", filterCars);
 document.getElementById("sortBy").addEventListener("change", filterCars);
 document.getElementById("sortOrder").addEventListener("change", filterCars);
 
-
-// Function to display compared car details
 function displayComparedCars(carIndices) {
     var compareContainer = document.getElementById("compareContainer");
-    compareContainer.innerHTML = ""; // Clear previous content
+    compareContainer.innerHTML = ""; 
     
-    var referenceCar = cars[carIndices[0]]; // First car in comparison
-    
+    var referenceCar = cars[carIndices[0]]; 
+
     carIndices.forEach(function(index, i) {
         var car = cars[index];
-        var comparisonIndex = (i === 0) ? 1 : 0; // Get the index for comparison
+        var comparisonIndex = (i === 0) ? 1 : 0; 
         
-        var comparisonCar = cars[carIndices[comparisonIndex]]; // Car for comparison
-        
+        var comparisonCar = cars[carIndices[comparisonIndex]]; 
+
         var carDetails = document.createElement("div");
         carDetails.classList.add("car-details");
         
-        carDetails.innerHTML = "<img src='" + car.image + "' class='car-image'>" + // Add car image
+        carDetails.innerHTML = "<img src='" + car.image + "' class='car-image'>" + 
         "<h2>" + car.make + " " + car.model + "</h2>" +
         "<p><strong>Year:</strong> <span class='" + (car.year > comparisonCar.year ? "highlight-green" : "highlight-red") + "'>" + car.year + "</span></p>" +
         "<p><strong>Price:</strong> <span class='" + (car.price < comparisonCar.price ? "highlight-green" : "highlight-red") + "'>$" + car.price.toLocaleString() + "</span></p>" +
@@ -142,53 +126,46 @@ function displayComparedCars(carIndices) {
         compareContainer.appendChild(carDetails);
     });
     
-    // Show the compare modal
     var modal = document.getElementById("compareModal");
     modal.style.display = "block";
 }
 
-
-
-// More Info Modal
 var modal = document.getElementById("moreInfoModal");
 var moreInfoContent = document.getElementById("moreInfoContent");
 
-// Event listener for "Close" button in the more info modal
 var closeBtn = document.getElementsByClassName("close")[0];
 closeBtn.onclick = function() {
     modal.style.display = "none";
 };
 
-// Event listener for clicking outside the more info modal to close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 };
 
-// Function to display more info modal
 function displayMoreInfo(car) {
-    moreInfoContent.innerHTML = "<img src='" + car.image + "' class='car-image'>" + // Add car image
+    moreInfoContent.innerHTML = "<img src='" + car.image + "' class='car-image'>" + 
     "<h2>" + car.make + " " + car.model + "</h2>" +
     "<strong>Year:</strong> " + car.year + "<br>" +
     "<strong>Price:</strong> $" + car.price.toLocaleString() + "<br>" +
     "<strong>Mileage:</strong> " + car.mileage.toLocaleString() + " miles<br>" +
-    "<button class='purchase-btn'>Purchase car</button>"; // Changed to button
+    "<button class='purchase-btn' onclick='redirectToPurchasePage()'>Purchase car</button>";
     modal.style.display = "block";
 }
 
+function redirectToPurchasePage() {
+    window.location.href = 'purchase.html';
+}
 
 
-// Compare Modal
 var compareModal = document.getElementById("compareModal");
 
-// Event listener for closing the compare modal
 var compareCloseBtn = compareModal.getElementsByClassName("close")[0];
 compareCloseBtn.onclick = function() {
     compareModal.style.display = "none";
 };
 
-// Event listener for clicking outside the compare modal to close it
 window.onclick = function(event) {
     if (event.target == compareModal) {
         compareModal.style.display = "none";
@@ -200,9 +177,8 @@ document.getElementById('showFiltersBtn').addEventListener('click', function() {
     filtersContainer.classList.toggle('hidden');
 });
 document.getElementById('aboutBtn').addEventListener('click', function() {
-    window.location.href = 'info.html'; // Redirect to the info.html page
+    window.location.href = 'info.html'; 
 });
 document.getElementById('purchase-btn').addEventListener('click', function() {
-    window.location.href = 'purchase.html'; // Redirect to the info.html page
+    window.location.href = 'purchase.html'; 
 });
-//comment
