@@ -52,7 +52,7 @@ input[type="text"] {
 
 /* Car Rows */
 .car-row {
-    border-bottom: 1px solid #ccc;
+/*  border-bottom: 1px solid #ccc;*/
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -60,7 +60,15 @@ input[type="text"] {
     transition: max-height 0.5s ease;
     overflow: hidden;
     position: relative;
-    border-radius: 20px;
+    
+    border-radius: 15px;
+}
+.car-row:nth-child(odd) {
+    background-color: #e0e0e0; /* Background color for odd rows */
+}
+
+.car-row:nth-child(even) {
+    background-color: #f0f0f0; /* Background color for even rows */
 }
 
 /* Car Info */
@@ -93,8 +101,9 @@ input[type="text"] {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
 }
 
 .close {
@@ -188,6 +197,6 @@ table.intro{
     position: absolute;
 /*  top: 0;*/
     right: 0;
-    margin-top: 20px; /* Adjust this value as needed */
-    margin-right: 20px; /* Adjust this value as needed */
+/*  margin-top: 20px; /* Adjust this value as needed */*/
+/*  margin-right: 20px; /* Adjust this value as needed */*/
 }
