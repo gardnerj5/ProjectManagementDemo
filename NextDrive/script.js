@@ -24,7 +24,7 @@ var cars = [
 ];
 
 // Function to display cars
-function displayCars(cars) {
+function displayCars(cars) { 
     var carList = document.getElementById("carList");
     carList.innerHTML = ""; // Clear previous content
 
