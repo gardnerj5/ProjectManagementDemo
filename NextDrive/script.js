@@ -198,3 +198,7 @@ document.getElementById('showFiltersBtn').addEventListener('click', function() {
     var filtersContainer = document.getElementById('filtersContainer');
     filtersContainer.classList.toggle('hidden');
 });
+document.getElementById('aboutBtn').addEventListener('click', function() {
+    window.location.href = 'info.html'; // Redirect to the info.html page
+});
+
