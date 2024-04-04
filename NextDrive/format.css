@@ -181,3 +181,6 @@ table.intro{
     background-color: aqua;
     background-color: aqua;
 }
+.hidden {
+    display: none;
+}

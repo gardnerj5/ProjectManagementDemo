@@ -193,3 +193,8 @@ window.onclick = function(event) {
         compareModal.style.display = "none";
     }
 };
+
+document.getElementById('showFiltersBtn').addEventListener('click', function() {
+    var filtersContainer = document.getElementById('filtersContainer');
+    filtersContainer.classList.toggle('hidden');
+});
