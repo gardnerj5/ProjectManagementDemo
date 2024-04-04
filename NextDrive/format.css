@@ -12,9 +12,9 @@ h1 {
 body {
     font-family: Arial, sans-serif;
     color: #333;
-    background-color: #f2f2f2;
     line-height: 1.6;
     padding: 20px;
+    background: linear-gradient(to bottom, #01374a 0%, #01374a calc(100% - 1900px), #bbedff calc(100% - 300px), #bbedff 100%);
 }
 
 body.mother {
