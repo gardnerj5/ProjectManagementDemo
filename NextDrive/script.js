@@ -201,4 +201,4 @@ document.getElementById('showFiltersBtn').addEventListener('click', function() {
 document.getElementById('aboutBtn').addEventListener('click', function() {
     window.location.href = 'info.html'; // Redirect to the info.html page
 });
-
+//comment
